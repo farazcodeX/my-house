@@ -11,4 +11,13 @@ public class Termostat extends Device{
             this.temperature = temperature;
     }
     public int getTemperature() {return temperature;}
+    @Override
+    public Device copy() {
+        Termostat termostat = new Termostat(super.getProtocol(), super.name);
+        termostat.temperature = this.temperature;
+
+        return termostat;
+
+
+    }
 }

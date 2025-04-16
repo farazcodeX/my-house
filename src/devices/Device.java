@@ -26,5 +26,6 @@ public abstract class Device {
     public Status getStatus() {return status;}
     public void setStatus(Status status) {this.status = status;}
     public Protocol getProtocol() {return protocol;}
+    public abstract Device copy();
     
 }

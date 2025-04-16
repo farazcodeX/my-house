@@ -12,4 +12,13 @@ public class Light extends Device{
         this.brightnes = brightnes;
     }
     public int getBrightness() {return brightnes;}
+    @Override
+    public Device copy() {
+        Light light = new Light(super.getProtocol(), super.name);
+        light.brightnes = brightnes;
+
+        return light;
+
+
+    }
 }
