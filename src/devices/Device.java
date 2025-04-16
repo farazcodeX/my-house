@@ -2,10 +2,10 @@ package devices;
 
 public abstract class Device {
     
-    String name;
+    public String name;
     private Status status = Status.OFF;
     private final Protocol protocol;
-    private final Type type;
+    public final Type type;
 
     public enum Status {
         ON, OFF
@@ -25,5 +25,6 @@ public abstract class Device {
 
     public Status getStatus() {return status;}
     public void setStatus(Status status) {this.status = status;}
+    public Protocol getProtocol() {return protocol;}
     
 }
