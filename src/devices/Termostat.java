@@ -7,7 +7,8 @@ public class Termostat extends Device{
     public Termostat(Protocol protocol, String name) {
         super(protocol, name, Device.Type.TERMOSTAT);
     }
-    public void setTemperature(int temperature) {this.temperature = temperature;}
+    public void setTemperature(int temperature) {
+            this.temperature = temperature;
+    }
     public int getTemperature() {return temperature;}
-    
 }

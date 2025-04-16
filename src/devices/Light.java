@@ -8,8 +8,8 @@ public class Light extends Device{
         super(protocol, name, Device.Type.LIGHT);
         
     }
-    private void setBrightness(int brightnes) {
+    public void setBrightness(int brightnes) {
         this.brightnes = brightnes;
     }
-    
+    public int getBrightness() {return brightnes;}
 }
