@@ -18,6 +18,10 @@ public final class RuleManager {
         Rule rule = new Rule(name, time, action);
         rules.add(rule);
     }
+    public static void checkRule(Time time) {
+        
+
+    }
     
 
 

@@ -5,19 +5,17 @@ public class Termostat extends Device{
     private int temperature;
 
     public Termostat(Protocol protocol, String name) {
-        super(protocol, name, Device.Type.TERMOSTAT);
+        super(protocol, name, Device.Type.Termostat);
     }
     public void setTemperature(int temperature) {
             this.temperature = temperature;
     }
     public int getTemperature() {return temperature;}
     @Override
-    public Device copy() {
+    public Termostat copy() {
         Termostat termostat = new Termostat(super.getProtocol(), super.name);
         termostat.temperature = this.temperature;
 
         return termostat;
-
-
     }
 }

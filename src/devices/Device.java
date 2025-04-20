@@ -1,6 +1,9 @@
 package devices;
 
-public abstract class Device {
+import java.util.ArrayList;
+import java.util.List;
+
+public class Device {
     
     public String name;
     private Status status = Status.OFF;
@@ -11,21 +14,21 @@ public abstract class Device {
         ON, OFF
     }
     public enum Protocol {
-        BLUETOUTH, WIFI
+        BLUETOOTH, WIFI
     }
     public enum Type {
-        LIGHT, TERMOSTAT
+        Light, Termostat
     }
+
     public Device(Protocol protocol, String name, Type type) {
         this.protocol = protocol;
         this.type = type;
         this.name = name;
-
     }
 
     public Status getStatus() {return status;}
     public void setStatus(Status status) {this.status = status;}
     public Protocol getProtocol() {return protocol;}
-    public abstract Device copy();
+    public Device copy() {return null;}
     
 }
