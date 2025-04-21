@@ -3,7 +3,7 @@ package devices;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Device {
+public abstract class Device {
     
     public String name;
     private Status status = Status.OFF;
@@ -16,7 +16,7 @@ public class Device {
     public enum Protocol {
         BLUETOOTH, WIFI
     }
-    public enum Type {
+    public static enum Type {
         Light, Termostat
     }
 
@@ -29,6 +29,8 @@ public class Device {
     public Status getStatus() {return status;}
     public void setStatus(Status status) {this.status = status;}
     public Protocol getProtocol() {return protocol;}
-    public Device copy() {return null;}
+    public abstract Device copy();
+    public abstract boolean setProprety(String proprety, String value);
+
     
 }

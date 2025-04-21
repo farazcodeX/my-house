@@ -1,5 +1,7 @@
 package devices;
 
+import java.lang.reflect.InaccessibleObjectException;
+
 public class Termostat extends Device{
 
     private int temperature;
@@ -17,5 +19,23 @@ public class Termostat extends Device{
         termostat.temperature = this.temperature;
 
         return termostat;
+    }
+    @Override
+    public boolean setProprety(String proprety, String value) {
+        switch (proprety) {
+            case "temprature" :
+            try {int val = Integer.parseInt(value);
+                if(val >= 10 && val <= 30) {
+                this.temperature = val;
+                return true;
+                }    
+            } catch(NumberFormatException e) {throw new InaccessibleObjectException("wrong value foramt inputed for proprety");}
+            break;
+            case "status" :
+            if(value.equals("on")) {super.setStatus(Device.Status.ON); return true;}
+            if(value.equals("off")) {super.setStatus(Device.Status.OFF); return true;}
+            break;
+        }
+        return false;
     }
 }

@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import devices.Device;
+import devices.Light;
+import devices.Termostat;
 import exceptions.DeviceNotFoundExceprion;
 import exceptions.InvalidInputException;
 import validators.DeviceValidator;
@@ -15,8 +17,8 @@ public class DeviceManager {
     private static HashMap<String, Device> devices = new HashMap<>();
     private static DeviceValidator deviceValidator = new DeviceValidator();
 
-    private static List<String> protocols = List.of("bluetooth", "wifi");
-    private static List<String> types = List.of("light", "termostat");
+    public static List<String> protocols = List.of("bluetooth", "wifi");
+    //public static List<String> types = List.of("light", "termostat");
 
     private DeviceManager() {}
 
@@ -35,35 +37,61 @@ public class DeviceManager {
        if(!protocols.contains(protocolInput)) {
           throw new InvalidInputException("Invalid protocol");
        }
-       if(!types.contains(typeInput)) {
-          throw new InvalidInputException("Invalid type input");
+
+       Device device = null;
+       switch (typeInput) {
+          case "Lihgt" : device = new Light(convertProtocol(protocolInput), name); break;
+          case "Termostat" : device = new Termostat(convertProtocol(protocolInput), name); break;
+          default : throw new InvalidInputException("Invalid type : type " + typeInput + " is not registerd"); 
        }
-
-       Device device = new Device(convertProtocol(protocolInput), name, convertType(typeInput));
-
-       devices.put(name, device);
+       devices.put(name, device.copy());
     }
     private static Device.Type convertType(String typeInput) {
         return Arrays.stream(Device.Type.values()).filter(type -> type.name().equals(typeInput)).findFirst().orElse(null);
     }
 
     public static void setDevice(String name, String proprety, String value) {
-        
-    }
 
+        Device device = devices.get(name);
+        if(device == null) {throw new InvalidInputException("Device name " + name + " not found");}
+
+        // input propreties to lowe case
+        if(device.setProprety(proprety, value)) {
+
+        } else {
+            throw new InvalidInputException("Something went wrong");
+        }
+
+    }
 
     private static Device.Protocol convertProtocol(String proInput) {
         return Arrays.stream(Device.Protocol.values()).filter(pro -> pro.name().equals(proInput)).findAny().orElse(null);
     }
-    public static void updateDevice(Device device) {
-        // replace the givne device with old device with same key
+
+    public static void removeDevice(String name) {
+        if(devices.containsKey(name)) {
+            devices.remove(name);
+        } else {
+            throw new InvalidInputException("Device : " + name + " not found");
+        }
     }
-    
-    
-    
-
-    
-
-
-
+    public static void listDevice() {
+        if(devices.isEmpty()) {
+            System.out.println("No device added");
+        } else {
+            for (Device device : devices.values()) {
+                if (device.type == Device.Type.Light) {
+                    Light light = (Light) device;
+                    System.out.println("Light : " + light.name +
+                        " status : " + light.getStatus().name() +
+                        " brightness : " + light.getBrightnes());
+                } else if (device.type == Device.Type.Termostat) {
+                    Termostat termostat = (Termostat) device;
+                    System.out.println("Termostat : " + termostat.name +
+                        " status : " + termostat.getStatus().name() +
+                        " Temperature : " + termostat.getTemperature());
+                }
+            }
+        }
+    }
 }
