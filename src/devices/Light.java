@@ -42,7 +42,7 @@ public class Light extends Device{
             break;
             case "status" :
             if(value.equalsIgnoreCase("on")) {super.setStatus(Device.Status.ON); return true;}
-            if(value.equalsIgnoreCase("off")) {super.setStatus(Device.Status.OFF); this.brightnes = 0; return true;}
+            if(value.equalsIgnoreCase("off")) {super.setStatus(Device.Status.OFF); return true;}
             break;
         }
         return false;
