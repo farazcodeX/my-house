@@ -40,8 +40,8 @@ public class DeviceManager {
 
        Device device = null;
        switch (typeInput) {
-          case "Lihgt" : device = new Light(convertProtocol(protocolInput), name); break;
-          case "Termostat" : device = new Termostat(convertProtocol(protocolInput), name); break;
+          case "lihgt" : device = new Light(convertProtocol(protocolInput), name); break;
+          case "termostat" : device = new Termostat(convertProtocol(protocolInput), name); break;
           default : throw new InvalidInputException("Invalid type : type " + typeInput + " is not registerd"); 
        }
        devices.put(name, device.copy());
@@ -61,7 +61,6 @@ public class DeviceManager {
         } else {
             throw new InvalidInputException("Something went wrong");
         }
-
     }
 
     private static Device.Protocol convertProtocol(String proInput) {
@@ -94,4 +93,13 @@ public class DeviceManager {
             }
         }
     }
+    public static void update(Device device) {
+        if(devices.containsKey(device.name)) {
+            devices.replace(device.name, device.copy());
+        } else {
+            throw new InvalidInputException("Device : " + device.name + " Not found");
+        }
+    }
+
+
 }
