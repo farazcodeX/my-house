@@ -14,8 +14,8 @@ public class UI {
     public static void getInput() {
         int numbers = scanner.nextInt();
         scanner.nextLine();
-        for(int i = 0; i < numbers; ++i) {
-            String input = scanner.nextLine().toLowerCase().trim();
+        for(int i = 0; i <= numbers; ++i) {
+            String input = scanner.nextLine().trim().toLowerCase();
             String[] split = input.split(" ");
             switch (split[0]) {
                 case "add_device" : addDevice(split); break;
@@ -25,10 +25,12 @@ public class UI {
                 case "list_devices" : list_devices(); break;
                 case "check_rules" : check_rules(split); break;
                 case "list_rules" : list_rules(); break;
+                default : System.out.println("wrong input");
             }
         }
     }
     public static void addDevice(String[] splits) {
+        System.out.println(splits[0] + "  " + splits[1] + "  " + "  " + splits[2] + " " + splits[3]);
         System.out.println("-------------------");
         try {
             DeviceManager.addDevice(splits[2], splits[3], splits[1]);
@@ -81,5 +83,4 @@ public class UI {
             System.out.println(e.getMessage());
         }
     }
-
 }

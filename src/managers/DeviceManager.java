@@ -30,6 +30,7 @@ public class DeviceManager {
             throw new DeviceNotFoundExceprion("Device : " + name + "  Not added");
         }
     }
+
     public static void addDevice(String name, String protocolInput, String typeInput) {
        if(devices.containsKey(name) || name.isEmpty()) {
           throw new InvalidInputException("Device Name : " + name + " is already exist OR name is empty");
@@ -40,8 +41,8 @@ public class DeviceManager {
 
        Device device = null;
        switch (typeInput) {
-          case "lihgt" : device = new Light(convertProtocol(protocolInput), name); break;
-          case "termostat" : device = new Termostat(convertProtocol(protocolInput), name); break;
+          case "light" : device = new Light(convertProtocol(protocolInput), name); break;
+          case "thermostat" : device = new Termostat(convertProtocol(protocolInput), name); break;
           default : throw new InvalidInputException("Invalid type : type " + typeInput + " is not registerd"); 
        }
        devices.put(name, device.copy());
@@ -57,7 +58,7 @@ public class DeviceManager {
 
         // input propreties to lowe case
         if(device.setProprety(proprety, value)) {
-
+            System.out.println("device updated successfully");
         } else {
             throw new InvalidInputException("Something went wrong");
         }

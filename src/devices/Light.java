@@ -31,7 +31,7 @@ public class Light extends Device{
     @Override
     public boolean setProprety(String proprety, String value) {
         switch (proprety) {
-            case "brightnes" : 
+            case "brightness" : 
             try {
                int val = Integer.parseInt(value);
                if(val >= 0 && val <= 100) {
@@ -41,8 +41,8 @@ public class Light extends Device{
             } catch (NumberFormatException e) {throw new InvalidInputException("WRONG format inputed");}
             break;
             case "status" :
-            if(value.equals("on")) {super.setStatus(Device.Status.ON); return true;}
-            if(value.equals("off")) {super.setStatus(Device.Status.OFF); this.brightnes = 0; return true;}
+            if(value.equalsIgnoreCase("on")) {super.setStatus(Device.Status.ON); return true;}
+            if(value.equalsIgnoreCase("off")) {super.setStatus(Device.Status.OFF); this.brightnes = 0; return true;}
             break;
         }
         return false;

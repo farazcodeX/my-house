@@ -23,7 +23,7 @@ public class Termostat extends Device{
     @Override
     public boolean setProprety(String proprety, String value) {
         switch (proprety) {
-            case "temprature" :
+            case "temperature" :
             try {int val = Integer.parseInt(value);
                 if(val >= 10 && val <= 30) {
                 this.temperature = val;
