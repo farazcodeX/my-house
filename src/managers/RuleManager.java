@@ -26,9 +26,10 @@ public final class RuleManager {
     }
     public static void checkRule(String time) {
         // 
-        if(!time.matches("([01]\\\\d|2[0-3]):[0-5]\\\\d")) {
-            throw new InvalidInputException("Invalid format : time must be in HH:mm format");
+        if (!time.matches("([01]\\d|2[0-3]):[0-5]\\d")) {
+            throw new InvalidInputException("Invalid format: time must be in HH:mm format");
         }
+        
 
         rules.stream().filter(rule -> rule.getTime().equals(time)).map(rule -> {
             Device device = DeviceManager.getDevice(rule.getName());

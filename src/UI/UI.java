@@ -30,7 +30,7 @@ public class UI {
         }
     }
     public static void addDevice(String[] splits) {
-        System.out.println(splits[0] + "  " + splits[1] + "  " + "  " + splits[2] + " " + splits[3]);
+      //  System.out.println(splits[0] + "  " + splits[1] + "  " + "  " + splits[2] + " " + splits[3]);
         System.out.println("-------------------");
         try {
             DeviceManager.addDevice(splits[2], splits[3], splits[1]);
